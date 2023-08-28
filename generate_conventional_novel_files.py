@@ -34,8 +34,8 @@ for s_tag in s_tags:
           continue
         for children in child:
           if "score" not in  children.attrib.keys():
-
-            sentence.append(children.text.replace(" ","").replace("\n",""))
+            pass
+            #sentence.append(children.text.replace(" ","").replace("\n",""))
           else:
             sentence.append(children.text.replace(" ","").replace("\n",""))
             #print(children.tag,children.attrib,children.attrib.keys(),children.text)
