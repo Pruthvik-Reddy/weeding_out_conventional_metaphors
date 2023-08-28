@@ -72,6 +72,7 @@ for s_tag in s_tags:
     if len(all_metaphor_idx)==0:
       literal_sentences_count+=1
       ind=len(sentence)
+      print(sentence)
       tokens = word_tokenize(sentence)
       pos_tags = pos_tag(tokens)
 
