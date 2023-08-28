@@ -71,17 +71,19 @@ for s_tag in s_tags:
     sentences=" ".join(e for e in sentence)
     if len(all_metaphor_idx)==0:
       literal_sentences_count+=1
-      ind=len(sentence)
-      print(sentence)
-      tokens = word_tokenize(sentence)
+      #ind=len(sentence)
+      #print(sentence)
+      sent=" ".join(e for e in sentence)
+      ind=len(sent)
+      tokens = word_tokenize(sent)
       pos_tags = pos_tag(tokens)
 
-      sentence_length=len(sentence)
+      sentence_length=len(sent)
       curr_ind=0
       for word,tag in pos_tags:
         if tag[0]=="V" and tag[1]=="B":
         #print("Verb")
-            all_literal_sentences.append((sentence,curr_ind))
+            all_literal_sentences.append((sent,curr_ind))
         curr_ind+=1
         break
     if len(all_metaphor_idx)>0:
