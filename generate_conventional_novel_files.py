@@ -71,8 +71,6 @@ for s_tag in s_tags:
     sentences=" ".join(e for e in sentence)
     if len(all_metaphor_idx)==0:
       literal_sentences_count+=1
-      #ind=len(sentence)
-      #print(sentence)
       sent=" ".join(e for e in sentence)
       ind=len(sent)
       tokens = word_tokenize(sent)
@@ -82,8 +80,8 @@ for s_tag in s_tags:
       curr_ind=0
       for word,tag in pos_tags:
         if tag[0]=="V" and tag[1]=="B":
-        #print("Verb")
-            all_literal_sentences.append((sent,curr_ind))
+        
+            all_literal_sentences.append((sent,curr_ind)) #Considering literal sentences containing verbs only
         curr_ind+=1
         break
     if len(all_metaphor_idx)>0:
@@ -95,15 +93,16 @@ for s_tag in s_tags:
 
     for i in range(len(all_metaphor_idx)):
       all_sentences.append((sentence,all_metaphor_idx[i],scores[i]))
-    #print(num,len(all_sentences))
+    
 print("Number of literal sentences = ",len(all_literal_sentences))
 print("Number of metaphor sentences = ",metaphor_sentences_count)
 
+"""
 if len(all_literal_sentences)+metaphor_sentences_count==len(s_tags):
   print("The literal sentences and metaphors sentences match the total number of sentences")
 else:
-  print("DOES NOT MATCH!!!")
-
+  print("DOES NOT MATCH!!! Because we are only considering literal sentences with verbs")
+"""
 print("Number of metaphorical sentences (a sentences may be counted twice if it has multiple)",len(all_sentences))
 
 
@@ -132,8 +131,22 @@ for i in range(len(all_sentences)):
 conventional_df = pd.DataFrame(conventional_metaphors, columns=columns)
 novel_df = pd.DataFrame(novel_metaphors, columns=columns)
 
+literals=[]
+for i in range(len(all_literal_sentences)):
+  curr_lis=[]
+  curr_lis.append(0)
+  curr_lis.append(all_literal_sentences[i][0])
+  curr_lis.append("verb")
+  curr_lis.append(all_literal_sentences[i][1])
+  literals.append(curr_lis)
+
+literals_df = pd.DataFrame(literals, columns=columns)
+
 print("The shape of conventional dataframe is ",conventional_df.shape)
 print("The shape of Novel dataframe shape is ",novel_df.shape)
+print("The shape of literal sentences is ",literals_df.shape)
+conventional_df.to_csv("conventional.tsv",index=True,sep="\t")
+novel_df.to_csv("novel.tsv",index=True,sep="\t")
+literals_df.to_csv("literals.tsv",index=True,sep="\t")
 
-#conventional_df.to_csv("conventional.tsv",index=True,sep="\t")
-#novel_df.to_csv("novel.tsv",index=True,sep="\t")
+
