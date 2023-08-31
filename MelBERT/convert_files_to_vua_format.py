@@ -13,7 +13,7 @@ df["pos"] = df["POS"]
 df["FGPOS"] = "VBZ"
 
 df_2["w_index"] = df_2["v_index"]
-df_2["pos"] = df_2["POS"]
+df_2["POS"] = df_2["pos"]
 df_2["FGPOS"] = "VBZ"
 
 
