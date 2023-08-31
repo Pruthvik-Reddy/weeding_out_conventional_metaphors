@@ -9,7 +9,7 @@ new_cols=["index","label","sentence","POS","FGPOS","w_index"]
 old_cols=["index","label","sentence","pos","v_index"]
 
 df["w_index"] = df["v_index"]
-df["pos"] = df["POS"]
+df["POS"] = df["pos"]
 df["FGPOS"] = "VBZ"
 
 df_2["w_index"] = df_2["v_index"]
